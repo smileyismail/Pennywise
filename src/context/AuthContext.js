@@ -12,7 +12,6 @@ import {
 } from "firebase/auth";
 
 import { auth } from "../config/firebase";
-import { Await } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -25,7 +24,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
     });
 
@@ -39,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     await updateProfile(auth.currentUser, { displayName: fullName });
   }
 
-  async function signIn(email, password) {
+  async function logIn(email, password) {
     await signInWithEmailAndPassword(auth, email, password);
   }
 
@@ -56,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     await signInWithPopup(auth, googleAuthProvider);
   }
 
-  const value = { user, signUp, signIn, logOut, forgotPassword, googleAuth };
+  const value = { user, signUp, logIn, logOut, forgotPassword, googleAuth };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

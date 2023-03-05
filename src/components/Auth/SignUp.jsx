@@ -70,7 +70,7 @@ const SignUp = () => {
       signUp(values.fullName, values.email, values.password)
         .then(() => navigate("/expenses"))
         .catch((err) => {
-          setServerError(err.message);
+          setServerError(err.code);
           setLoading(false);
         });
     }
@@ -137,15 +137,16 @@ const SignUp = () => {
           <p>{level.label}</p>
         </div>
       </div>
-      <p className="text-sm text-rose-600">{serverError}</p>
+
+      {serverError && <p className="text-sm text-rose-600">{serverError}</p>}
 
       <div className="text-gray-800">
         Don't have an account?
         <Link
-          to="/signIn"
+          to="/logIn"
           className="text-action hover:contrast-200 duration-200"
         >
-          &nbsp;Sign In
+          &nbsp;Log In
         </Link>
       </div>
 

@@ -6,7 +6,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import Spinner from "../UI/Others/Spinner";
 import SocialAuth from "./SocialAuth";
 
-const SignIn = () => {
+const LogIn = () => {
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -16,7 +16,7 @@ const SignIn = () => {
   const [serverError, setServerError] = useState("");
   const navigate = useNavigate();
 
-  const { signIn } = useAuthContext();
+  const { logIn } = useAuthContext();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -51,10 +51,10 @@ const SignIn = () => {
       setLoading(true);
       setServerError("");
 
-      signIn(values.email, values.password)
+      logIn(values.email, values.password)
         .then(() => navigate("/expenses"))
         .catch((err) => {
-          setServerError(err.message);
+          setServerError(err.code);
           setLoading(false);
         });
     }
@@ -65,7 +65,7 @@ const SignIn = () => {
       onSubmit={handleSubmit}
       className="flex flex-col justify-center items-center gap-6 mt-20 bg-white max-w-lg mx-auto rounded-lg drop-shadow-2xl p-10 font-roboto text-gray-800"
     >
-      <h4 className="text-2xl font-bold text-gray-800">Sign In</h4>
+      <h4 className="text-2xl font-bold text-gray-800">Log In</h4>
       <div className="flex flex-col w-full gap-1">
         <label htmlFor="email" className="text-sm text-gray-600">
           Email Address
@@ -99,7 +99,7 @@ const SignIn = () => {
         <Link to="/forgotPassword">Forgot Password?</Link>
       </div>
 
-      <p className="text-sm text-rose-600">{serverError}</p>
+      {serverError && <p className="text-sm text-rose-600">{serverError}</p>}
 
       <div className="text-gray-800">
         Don't have an account?
@@ -129,4 +129,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default LogIn;

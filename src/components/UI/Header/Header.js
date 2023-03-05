@@ -1,20 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import HeaderProfile from "./HeaderProfile";
+import Logo from "./Logo";
+import Nav from "./Nav";
+
+import { useAuthContext } from "../../../context/AuthContext";
 
 const Header = () => {
+  const { user } = useAuthContext();
+
   return (
-    <header className="sticky top-0 w-screen bg-secondary py-4 px-4">
-      <div className="max-w-5xl flex justify-between items-center mx-auto content-center">
-        <h3 className="text-3xl font-archivo text-blackDark hover:text-blackLight duration-200 hover:scale-105">
-          <Link to="/">$ Pennywise</Link>
-        </h3>
-        <div>
-          <HeaderProfile />
-        </div>
-      </div>
-    </header>
+    <>
+      {!user ? (
+        <header className="sticky w-full top-0 bg-secondary p-4">
+          <div className="max-w-5xl flex justify-between items-center mx-auto">
+            <div>
+              <Logo />
+            </div>
+            <div>
+              <Nav />
+            </div>
+          </div>
+        </header>
+      ) : (
+        <header className="fixed right-2 md:right-5 top-2 md:top-5 z-10">
+          <div>
+            <Nav />
+          </div>
+        </header>
+      )}
+    </>
   );
 };
 

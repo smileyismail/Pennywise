@@ -8,8 +8,8 @@ const ForgotPassword = () => {
   const [values, setValues] = useState({ email: "" });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState("");
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const { forgotPassword } = useAuthContext();
 
@@ -39,9 +39,11 @@ const ForgotPassword = () => {
       setServerError("");
 
       forgotPassword(values.email)
-        .then(() => navigate("/signIn"))
+        .then(() => {
+          setIsEmailSent(true);
+        })
         .catch((err) => {
-          setServerError(err.message);
+          setServerError(err.code);
           setLoading(false);
         });
     }
@@ -52,7 +54,7 @@ const ForgotPassword = () => {
       onSubmit={handleSubmit}
       className="flex flex-col justify-center items-center gap-6 mt-20 bg-white max-w-lg mx-auto rounded-lg drop-shadow-2xl p-10 font-roboto text-gray-800"
     >
-      <h4 className="text-2xl font-bold text-gray-800">Sign In</h4>
+      <h4 className="text-2xl font-bold text-gray-800">Forgot Password</h4>
       <div className="flex flex-col w-full gap-1">
         <label htmlFor="email" className="text-sm text-gray-600">
           Email Address
@@ -68,28 +70,47 @@ const ForgotPassword = () => {
         <p className="text-sm text-rose-600">{errors && errors.email}</p>
       </div>
 
-      <div className="text-gray-800">
-        <Link
-          to="/signIn"
-          className="text-action hover:contrast-200 duration-200"
-        >
-          Sign In
-        </Link>
-        &nbsp;or&nbsp;
-        <Link
-          to="/signUp"
-          className="text-action hover:contrast-200 duration-200"
-        >
-          Sign Up
-        </Link>
-      </div>
+      {serverError && <p className="text-sm text-rose-600">{serverError}</p>}
 
-      <button
-        type="submit"
-        className="w-full bg-action text-gray-50 p-2 text-lg rounded-md drop-shadow-xl hover:contrast-200 duration-200 font-medium active:scale-105"
-      >
-        {loading ? <Spinner /> : "Submit"}
-      </button>
+      {isEmailSent ? (
+        <p className="text-gray-800">
+          Check your inbox for password reset link.
+        </p>
+      ) : (
+        <div className="text-gray-800">
+          <Link
+            to="/logIn"
+            className="text-action hover:contrast-200 duration-200"
+          >
+            Log In
+          </Link>
+          &nbsp;or&nbsp;
+          <Link
+            to="/signUp"
+            className="text-action hover:contrast-200 duration-200"
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
+
+      {isEmailSent ? (
+        <Link to="/logIn" className="w-full">
+          <button
+            type="button"
+            className="w-full bg-action text-gray-50 p-2 text-lg rounded-md drop-shadow-xl hover:contrast-200 duration-200 font-medium active:scale-105"
+          >
+            ok
+          </button>
+        </Link>
+      ) : (
+        <button
+          type="submit"
+          className="w-full bg-action text-gray-50 p-2 text-lg rounded-md drop-shadow-xl hover:contrast-200 duration-200 font-medium active:scale-105"
+        >
+          {loading ? <Spinner /> : "Submit"}
+        </button>
+      )}
     </form>
   );
 };
