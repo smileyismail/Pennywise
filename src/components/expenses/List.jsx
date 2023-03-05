@@ -5,7 +5,6 @@ import { onValue, ref, remove, update } from "firebase/database";
 import { db } from "../../config/firebase";
 
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
-import dummyExpenses from "../../data/dummyExpenses";
 
 const List = () => {
   const [values, setValues] = useState({
