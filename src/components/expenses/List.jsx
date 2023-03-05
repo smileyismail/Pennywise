@@ -1,39 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useAuthContext } from "../../context/AuthContext";
-import { onValue, ref, remove, update } from "firebase/database";
+import { ref, remove, update } from "firebase/database";
 import { db } from "../../config/firebase";
 
 import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 
-const List = () => {
+const List = ({ expenses }) => {
   const [values, setValues] = useState({
     amount: "",
     title: "",
     type: "",
     date: "",
   });
-  const [expenses, setExpenses] = useState([]);
   const [errors, setErrors] = useState({});
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [selectedId, setSelectedId] = useState("");
 
   const { user } = useAuthContext();
-
-  useEffect(() => {
-    if (user) {
-      onValue(ref(db, `${user.uid}`), (snapshot) => {
-        setExpenses([]);
-        const data = snapshot.val();
-        if (data !== null) {
-          Object.values(data).map((expense) =>
-            setExpenses((prevState) => [...prevState, expense])
-          );
-        }
-      });
-    }
-  }, [user]);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -95,13 +80,19 @@ const List = () => {
     remove(ref(db, `/${user.uid}/${selectedId}`));
     setDeleteModal(false);
   }
+  console.log(expenses.length);
   return (
     <>
-      <ul className="bg-secondary px-2 rounded-md font-roboto">
+      <ul className="bg-secondary p-2 rounded-md font-roboto flex flex-col gap-2">
+        {expenses.length === 0 && (
+          <li className="p-2 bg-primary text-center">
+            You don't have any expenses, add one to view.
+          </li>
+        )}
         {expenses.map((item) => (
           <li
             key={item.id}
-            className="bg-primary p-2 rounded-md flex justify-between my-2"
+            className="bg-primary p-2 rounded-md flex justify-between"
           >
             <div className="flex justify-center items-center gap-4">
               <div className="bg-blackLight min-w-[5rem] md:min-w-[6rem] min-h-[5rem] md:min-h-[6rem] text-primary font-medium rounded-md p-2 flex justify-center items-center flex-col text-base">
