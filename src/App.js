@@ -1,81 +1,49 @@
-import React, { useState } from "react";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import "./App.css";
+import { AuthProvider } from "./context/AuthContext";
 
-import Expenses from "./Components/Expenses";
-import NewExpenseForm from "./Components/NewExpenseForm";
+import {
+  ProtectedAppRoutes,
+  ProtectedAuthRoutes,
+} from "./routes/ProtectedRoutes";
 
-const dummyExpenses = [
-  {
-    id: 1,
-    title: "Recharge",
-    amount: 199,
-    date: new Date(2022, 3, 15),
-  },
-  {
-    id: 2,
-    title: "Recharge",
-    amount: 600,
-    date: new Date(2021, 6, 15),
-  },
-  {
-    id: 3,
-    title: "Recharge",
-    amount: 129,
-    date: new Date(2020, 1, 15),
-  },
-  {
-    id: 8,
-    title: "Recharge",
-    amount: 799,
-    date: new Date(2029, 4, 15),
-  },
-  {
-    id: 9,
-    title: "Recharge",
-    amount: 1009,
-    date: new Date(2017, 0, 15),
-  },
-];
+// page imports
+import Header from "./components/UI/Header/Header";
+import LandingPage from "./components/LandingPage/LandingPage";
+
+// auth pages import
+import SignIn from "./components/Auth/SignIn";
+import SignUp from "./components/Auth/SignUp";
+import ForgotPassword from "./components/Auth/ForgotPassword";
+import ResetPassword from "./components/Auth/ResetPassword";
+
+//app pages import
+import ExpensesPage from "./components/expenses/Expenses";
 
 const App = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [expenses, setExpenses] = useState(dummyExpenses);
-
-  const addExpenseHandler = (expenses) => {
-    setExpenses((prevExpenses) => {
-      return [expenses, ...prevExpenses];
-    });
-  };
-
-  const addExpenseBtnHandler = () => {
-    setIsEditing(true);
-  };
-
-  const cancelEditingHandler = (cancelBtn) => {
-    setIsEditing(false);
-  };
-
   return (
-    <div>
-      <div className="add_expense">
-        {isEditing === false ? (
-          <button
-            type="button"
-            className="add_expense_btn"
-            onClick={addExpenseBtnHandler}
-          >
-            Add New Expense
-          </button>
-        ) : (
-          <NewExpenseForm
-            onAddExpense={addExpenseHandler}
-            cancelBtn={cancelEditingHandler}
-          />
-        )}
+    <AuthProvider>
+      <div className="bg-primary w-screen h-screen">
+        <Header />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+
+          {/* auth routes */}
+          <Route element={<ProtectedAuthRoutes />}>
+            <Route path="signIn" element={<SignIn />} />
+            <Route path="signUp" element={<SignUp />} />
+            <Route path="forgotPassword" element={<ForgotPassword />} />
+            <Route path="resetPassword" element={<ResetPassword />} />
+          </Route>
+
+          {/* app routes */}
+          <Route element={<ProtectedAppRoutes />}>
+            <Route path="expenses" element={<ExpensesPage />} />
+          </Route>
+        </Routes>
       </div>
-      <Expenses item={expenses} />
-    </div>
+    </AuthProvider>
   );
 };
 
