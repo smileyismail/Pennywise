@@ -80,7 +80,6 @@ const List = ({ expenses }) => {
     remove(ref(db, `/${user.uid}/${selectedId}`));
     setDeleteModal(false);
   }
-  console.log(expenses.length);
   return (
     <>
       <ul className="bg-secondary p-2 rounded-md font-roboto flex flex-col gap-2">
