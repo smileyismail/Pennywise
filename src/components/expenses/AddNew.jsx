@@ -80,7 +80,7 @@ const AddNew = () => {
       <button
         type="button"
         onClick={handleModelOpen}
-        className="fixed bottom-5 right-5 bg-action text-gray-50 p-4  rounded-full drop-shadow-xl hover:contrast-200 duration-200 active:scale-105"
+        className="fixed bottom-5 z-50 right-5 bg-action text-gray-50 p-4  rounded-full drop-shadow-xl hover:contrast-200 duration-200 active:scale-105"
       >
         <BsPlus className="text-2xl" />
       </button>
