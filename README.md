@@ -1,15 +1,47 @@
+# Pennywise
 
-# Expense Tracker
+Expense tracking websites simplify financial management by providing an online platform for categorizing, tracking, and analyzing expenses, saving time and reducing errors.
 
-A React web application that can be used to track all the expenses of day-to-day life.
-## Live Preview
+## Demo
 
-https://smiley-expense-tracker.netlify.app/
-## Authors
+<a href="https://pennywisee.netlify.app/" target="_blank">Click Here</a> for Live Preview.
 
-- [@smiley](https://github.com/smileyismail)
+## Tech Stack
 
+**Client:** React, Material UI, Tailwind CSS Movies DB
+**Server:** Firebase, Fire store, Firebase Authentication
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/smileyismail/Pennywise
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm start
+```
+
+## Feedback
+
+If you have any feedback, please reach out to us at smileyismail67@gmail.com
 
 ## 🔗 Links
+
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://smiley-ismail.netlify.app/)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/smileyismail)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/smileyismail/)
