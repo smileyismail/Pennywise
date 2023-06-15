@@ -35,8 +35,6 @@ const LogIn = () => {
     }
     if (!values.password) {
       newErrors.password = "Password is required";
-    } else if (values.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
     }
 
     setErrors(newErrors);
@@ -54,7 +52,7 @@ const LogIn = () => {
       logIn(values.email, values.password)
         .then(() => navigate("/expenses"))
         .catch((err) => {
-          setServerError(err.code);
+          setServerError("Check your email and password");
           setLoading(false);
         });
     }

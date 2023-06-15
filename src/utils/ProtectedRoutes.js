@@ -15,13 +15,13 @@ export const ProtectAuthRoutes = () => {
   } else {
     return (
       <div className="flex items-center flex-col gap-6 pt-28">
-        <h3 className="text-2xl font-medium">User is already Logged In...</h3>
+        <h3 className="text-2xl font-medium">You are already Logged In...</h3>
         <Link to="/expenses">
           <button
             type="button"
             className="bg-action text-gray-50 text-sm py-2 px-4 sm:text-lg rounded-md drop-shadow-xl hover:contrast-200 duration-200 font-medium active:scale-105 whitespace-nowrap"
           >
-            Go to Home page
+            Go to Expenses
           </button>
         </Link>
       </div>

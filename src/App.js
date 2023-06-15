@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
 
-import { ProtectAppRoutes, ProtectAuthRoutes } from "./routes/ProtectedRoutes";
+import { ProtectAppRoutes, ProtectAuthRoutes } from "./utils/ProtectedRoutes";
 
 // page imports
 import Header from "./components/UI/Header/Header";

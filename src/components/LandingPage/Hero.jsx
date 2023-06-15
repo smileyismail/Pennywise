@@ -26,7 +26,7 @@ const Hero = () => {
                 type="button"
                 className="bg-action text-gray-50 text-sm py-2 px-4 sm:text-lg rounded-md drop-shadow-xl hover:contrast-200 duration-200 font-medium active:scale-105 whitespace-nowrap"
               >
-                Go to Home
+                Go to Expenses
               </button>
             </Link>
           ) : (

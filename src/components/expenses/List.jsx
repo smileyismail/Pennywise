@@ -30,10 +30,7 @@ const List = ({ expenses }) => {
     setSelectedId(item.id);
     setValues({
       ...values,
-      amount: item.amount,
-      title: item.title,
-      type: item.type,
-      date: item.date,
+      ...item,
     });
   }
   function handleDeleteModalOpen(item) {

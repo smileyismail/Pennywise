@@ -14,7 +14,7 @@ const SocialAuth = () => {
 
     googleAuth()
       .then(() => navigate("/expenses"))
-      .catch((err) => console.log(err.message));
+      .catch((err) => console.log("Please try again later"));
   }
 
   return (

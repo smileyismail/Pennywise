@@ -64,7 +64,7 @@ const AddNew = () => {
           setValues(initialValues);
         })
         .catch((err) => {
-          console.log(err);
+          console.log("expense not added");
         });
     }
   }
